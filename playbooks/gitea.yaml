@@ -1,6 +1,6 @@
 ---
 - name: gitea
-  hosts: localhost
+  hosts: all
   become: yes
   roles:
   - gitea
