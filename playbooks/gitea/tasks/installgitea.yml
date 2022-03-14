@@ -38,7 +38,8 @@
   with_items:
   - python-pip
   - python3-pip
-
+- name: command hash -r
+  command: hash -r
 - name: install docker-py
   pip: name=docker-py
  
