@@ -1,17 +1,24 @@
 ---
 - name: Update apt cache
   apt: update_cache=yes cache_valid_time=3600
+
 - name: Upgrade all apt packages
   apt: upgrade=dist
 
 - name: Install dependencies
-  apt: name={{ item }} state=present update_cache=yes
-  with_items:
-     - apt-transport-https
-     - ca-certificates
-     - curl
-     - software-properties-common
-     - gnupg-agent
+  apt: name=apt-transport-https state=present update_cache=yes
+
+- name: Install dependencies
+  apt: name=ca-certificates state=present update_cache=yes
+
+- name: Install dependencies
+  apt: name=curl state=present update_cache=yes
+
+- name: Install dependencies
+  apt: name=software-properties-common state=present update_cache=yes
+- name: Install dependencies
+  apt: name=gnupg-agent state=present update_cache=yes
+
 - name: Add an apt signing key for Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
@@ -30,10 +37,8 @@
   become: true
 
 - name: Install Python pip
-  apt: name={{ item }} update_cache=true state=present force_apt_get=yes
-  with_items:
-  - python-pip
-  - python3-pip
+  apt: name=python3-pip update_cache=true state=present force_apt_get=yes
+ 
 
 - name: install docker-py
   pip: name=docker-py
