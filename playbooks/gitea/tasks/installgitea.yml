@@ -5,12 +5,8 @@
   apt: upgrade=dist
 
 - name: Install dependencies
-  apt:
-   name: "{{ packages }}"
-   state: present
-   update_cache: yes
-  vars:
-     packages:
+  apt: name={{ item }} state=present update_cache=yes
+  with_items:
      - apt-transport-https
      - ca-certificates
      - curl
@@ -43,14 +39,7 @@
   pip: name=docker-py
  
 - name: Install Docker
-  apt:
-    name: "{{ packages }}"
-    state: present
-    update_cache: yes
-  vars:
-    packages:
-    - docker.io
-
+  apt: name=docker.io state=present update_cache=yes
 - name: create a docker network
   docker_network:
     name: gitea
