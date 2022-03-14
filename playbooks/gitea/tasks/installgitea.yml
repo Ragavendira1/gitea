@@ -9,13 +9,13 @@
    name: "{{ packages }}"
    state: present
    update_cache: yes
-   vars:
+  vars:
      packages:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - gnupg-agent
+     - apt-transport-https
+     - ca-certificates
+     - curl
+     - software-properties-common
+     - gnupg-agent
 - name: Add an apt signing key for Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
@@ -30,9 +30,9 @@
     name: "{{ packages }}"
     state: present
     update_cache: yes
-    vars:
-      packages:
-      - docker.io
+  vars:
+    packages:
+    - docker.io
 
 - name: create a docker network
   docker_network:
