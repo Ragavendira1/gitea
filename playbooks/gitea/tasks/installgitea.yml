@@ -1,4 +1,16 @@
 ---
+- name: Install pip
+  apt: name=python3-pip state=present
+
+- name: install docker-py
+  pip: name=docker-py
+
+- name: Install docker.io
+  apt: name=docker.io
+
+- name: Ensure service is enabled
+  command: systemctl restart docker
+
 - name: create a docker network
   docker_network:
     name: gitea
@@ -29,6 +41,7 @@
     - /home/ansibleadm/gitea:/data
     networks:
     - name: gitea
+
 - name: Check if container is running
   shell: docker ps
 
